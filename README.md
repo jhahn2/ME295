@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="docs/figures/hero.png" width="100%" alt="A parallel-jaw gripper approaches a packed shelf horizontally, slides thin ultrasonic tactile fingers into the gaps beside one book and pulls it out sideways; side panels show the measured shear field, the friction-cone margin controller, and an LLM agent calling tactile tools.">
+  <img src="docs/figures/hero.png" width="100%" alt="A parallel-jaw gripper approaches a packed shelf horizontally, slides thin tactile fingers into the gaps beside one book and pulls it out sideways; side panels show the measured shear field, the friction-cone margin controller, and an LLM agent calling tactile tools.">
 </p>
 
 # Shear-Aware Agentic Grasping
 
-**A thin ultrasonic tactile skin lets a parallel-jaw gripper feel shear; an LLM agent uses that touch as a tool to grasp gently and pull books off a shelf.**
+**A thin tactile skin lets a parallel-jaw gripper feel shear; an LLM agent uses that touch as a tool to grasp gently and pull books off a shelf.**
 
 AM/ME/CE 295 research project (Caltech, Fall 2026) · Dohyun ([@DHLeexpress](https://github.com/DHLeexpress)) · Jihoon ([@jhahn2](https://github.com/jhahn2))
 
 > **Status: week 2, laying the foundation.** The topic is drafted, not locked. Latest report: [Lab Report 1](reports/LR1_week02.md) ([Word version](reports/LR1_week02.docx)) · running log: [LOG.md](LOG.md) · [draft proposal](docs/proposal_draft.md) · [related work](docs/related_work.md)
 
 ## Idea
-Parallel-jaw grippers know how far they closed and roughly how hard they squeeze, but not how close each contact is to slipping. Vision cannot see that either, least of all inside a packed shelf. Our ultrasonic tactile skin on a Robotiq 2F-140 finger measures the shear-strain field at the contact (~50 ms per frame today). We use it at three levels:
+Parallel-jaw grippers know how far they closed and roughly how hard they squeeze, but not how close each contact is to slipping. Vision cannot see that either, least of all inside a packed shelf. Our tactile skin on a Robotiq 2F-140 finger measures the shear-strain field at the contact (~50 ms per frame today). We use it at three levels:
 
 | | Layer | What we build | Compared against |
 |---|---|---|---|
@@ -36,7 +36,7 @@ results/               small generated tables (raw data and agent logs stay out 
 .github/workflows/     CI: tests, offline agent episode, key scan
 LOG.md                 running log
 ```
-Hardware-side code (ultrasound acquisition, ROS 2 wrapper, UR10e/Robotiq drivers) will move into `sensing/` and `ros2_ws/`.
+Hardware-side code (tactile data acquisition, ROS 2 wrapper, UR10e/Robotiq drivers) will move into `sensing/` and `ros2_ws/`.
 
 ## Quickstart
 ```bash
@@ -61,7 +61,7 @@ Scripts and tests add `src/` to the path themselves, so no install is required.
 - **Offline by default.** `MockLLM` runs the same loop without a key, so tests and CI never need one.
 
 ## Hardware (current)
-UR10e · Robotiq 2F-140 (10–125 N grip force) · ultrasonic tactile skin on one finger, second side pending · ultrasound acquisition PC ↔ robot PC over Ethernet/ROS.
+UR10e · Robotiq 2F-140 (10–125 N grip force) · tactile skin on one finger, second side pending · tactile data acquisition PC ↔ robot PC over Ethernet/ROS.
 
 ## Data and confidentiality
-Raw ultrasound frames, recordings, agent run logs and internal lab material are **not** tracked (`data/`, `recordings/`, `results/agent_runs/`, `internal/` are git-ignored). Sensor-design details stay out of this public repo until they are cleared for publication.
+Raw tactile data frames, recordings, agent run logs and internal lab material are **not** tracked (`data/`, `recordings/`, `results/agent_runs/`, `internal/` are git-ignored). Sensor-design details stay out of this public repo until they are cleared for publication.
